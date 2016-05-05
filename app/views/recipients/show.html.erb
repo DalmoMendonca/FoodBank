@@ -1,0 +1,60 @@
+<p id="notice"><%= notice %></p>
+
+<div class="panel panel-info container-fluid">
+  <div class="row">
+    <div class="col-sm-4 col-md-3">
+      <p>
+      content to be added
+      </p>
+      <p>
+        <%= link_to 'Edit', edit_recipient_path(@recipient), class: "btn btn-info" %>
+        <%= link_to 'Delete', @recipient, class: "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %>
+        <%= link_to 'Back', recipients_path, class: "btn btn-default" %>
+      </p>
+    </div>
+    <div class="col-sm-8 col-md-9">
+      <h1><%= @recipient.firstName + " " + @recipient.lastName %></h1>
+
+      <p>
+        <b>Phone Number:</b>
+        <%= @recipient.phoneNumber %>
+      </p>
+
+      <p>
+        <b>Household Nize:</b>
+        <%= @recipient.householdSize %>
+      </p>
+
+      <p>
+        <b>Address:</b>
+        <%= @recipient.address %>
+      </p>
+
+      <p>
+        <b>City, State:</b>
+        <%= @recipient.city %>
+      </p>
+
+      <p>
+        <b>Zip:</b>
+        <%= @recipient.zip %>
+      </p>
+
+      <p>
+        <b>Notes:</b><br>
+        <%= @recipient.publicNote %><br>
+        <%= @recipient.privateNote %>
+      </p>
+
+    </div>
+  </div>
+</div>
+
+<div class="panel panel-info">
+  <div class="panel-heading">
+    <h2 class="panel-title">Collection History</h2>
+  </div>
+  <div class="panel-body">
+    content to be added
+  </div>
+</div>
