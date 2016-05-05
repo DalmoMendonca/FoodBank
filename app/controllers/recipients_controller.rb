@@ -75,7 +75,7 @@ class RecipientsController < ApplicationController
     end
   
     def sort_column
-      Recipient.column_names.include?(params[:sort]) ? params[:sort] : "recipients.firstName"
+      Recipient.column_names.include?(params[:sort]) ? params[:sort] : "\"recipients.firstName\""
     end
     
     #sanitized paramaeters for sorting direction
