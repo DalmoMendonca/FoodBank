@@ -74,11 +74,11 @@ class RecipientsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def recipient_params
-      params.require(:recipient).permit(:firstName, :lastName, :phoneNumber, :householdSize, :address, :city, :zip, :publicNote, :privateNote, :image, :contact)
+      params.require(:recipient).permit(:first_name, :last_name, :phone_number, :household_size, :address, :city, :zip, :public_note, :private_note, :image, :contact)
     end
   
     def sort_column
-      Recipient.column_names.include?(params[:sort]) ? params[:sort] : "\"firstName\""
+      Recipient.column_names.include?(params[:sort]) ? params[:sort] : "first_name"
     end
     
     #sanitized paramaeters for sorting direction
