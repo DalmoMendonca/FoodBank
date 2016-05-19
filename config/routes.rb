@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
-  resources :recipients
-  resources :contacts
+  resources :recipients do
+    resources :contacts
+  end
   get 'recipients' => 'recipients#show'
   root :to => 'pages#home', :controller => 'pages', :action => :home
   # The priority is based upon order of creation: first created -> highest priority.

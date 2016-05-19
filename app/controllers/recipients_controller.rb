@@ -1,6 +1,7 @@
 class RecipientsController < ApplicationController
   before_action :set_recipient, only: [:show, :edit, :update, :destroy]
   helper_method :sort_column, :sort_direction
+  #accepts_nested_attributes_for :contact
 
   # GET /recipients
   # GET /recipients.json
@@ -11,6 +12,8 @@ class RecipientsController < ApplicationController
   # GET /recipients/1
   # GET /recipients/1.json
   def show
+    @recipient = Recipient.find(params[:id])
+    @contacts = @recipient.contacts.all
   end
 
   # GET /recipients/new
@@ -71,7 +74,7 @@ class RecipientsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def recipient_params
-      params.require(:recipient).permit(:firstName, :lastName, :phoneNumber, :householdSize, :address, :city, :zip, :publicNote, :privateNote)
+      params.require(:recipient).permit(:firstName, :lastName, :phoneNumber, :householdSize, :address, :city, :zip, :publicNote, :privateNote, :image, :contact)
     end
   
     def sort_column

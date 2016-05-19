@@ -1,20 +1,27 @@
 class ContactsController < ApplicationController
-  before_action :set_contact, only: [:show, :edit, :update, :destroy]
+  before_action :set_contact, only: [:show, :edit, :update, :destroy, :add]
+  before_filter :load_recipient
 
   # GET /contacts
   # GET /contacts.json
   def index
-    @contacts = Contact.all
+    #@contacts = Contact.all
+    @contacts = @recipient.contacts.all
+    #format.json { head :no_content }
   end
 
   # GET /contacts/1
   # GET /contacts/1.json
   def show
+    @contact = @recipient.contacts.find(params[:id])
   end
 
   # GET /contacts/new
   def new
-    @contact = Contact.new
+    #@contact = Contact.new
+    @recipient = Recipient.find(params[:recipient_id]) #instead of :id
+    @contact = @recipient.contacts.new
+    #respond_with(@contact)
   end
 
   # GET /contacts/1/edit
@@ -24,11 +31,13 @@ class ContactsController < ApplicationController
   # POST /contacts
   # POST /contacts.json
   def create
-    @contact = Contact.new(contact_params)
+    #@recipient = Recipient.find(params[:recipient_id]) #instead of :id
+    @contact = @recipient.contacts.new(contact_params)
+    #@contact = Contact.new
 
     respond_to do |format|
       if @contact.save
-        format.html { redirect_to @contact, notice: 'Contact was successfully created.' }
+        format.html { redirect_to [@recipient, @contact], notice: 'Contact was successfully created.' }
         format.json { render :show, status: :created, location: @contact }
       else
         format.html { render :new }
@@ -69,6 +78,10 @@ class ContactsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def contact_params
-      params.require(:contact).permit(:date, :note, :action)
+      params.require(:contact).permit(:date, :note, :action, :recipient_id)
     end
-end
+
+    def load_recipient
+      @recipient = Recipient.find(params[:recipient_id])
+    end
+  end
